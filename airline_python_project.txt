@@ -1,0 +1,297 @@
+import random
+class User:
+        def __init__(self):
+                self.name="nil"
+                self.state="nil"
+                self.emailid="nil"
+                self.dob="nil"
+                self.__userid=0
+                self.__password=0
+                self.age=0
+        def registration(self):
+                self.name=input("Enter your name")
+                self.state=input("Enter the state")
+                self.emailid=input("Enter your emailid")
+                self.dob=input("Enetr your dateofbirth")
+                self.__userid=int(input("Set an userid"))
+                self.__password=int(input("Set password"))
+                self.age=int(input("Enter your age"))
+        def accountlogin(self,ks,pswd):
+                if ks!=self.__userid or pswd!=self.__password:
+                        return 0
+                else:
+                        return 1
+class Passenger:
+        def __init__(self):
+                self.name=input("enter name")
+                self.age=int(input("Enter age"))
+                self.nation=input("Enter nationality")
+                self.state=input("Enter state")
+                self.dob=input("Enter date of birth")
+                self.depart=0
+                self.cprice=0
+                self.address=input("Enter address")
+                self.ph=input("enter phone number")
+                self.em=input("Enter email id")
+                self.tprice=0
+                self.desti="Nill"
+                self.lo=input("Enter your location")
+        def display(self):
+                print("*************Booking Details****************")
+                print("Name\t",self.name)
+                print("Age\t",self.age)
+                print("Nationality\t",self.nation)
+                print("DOB\t",self.dob)
+                print("Departure\t",self.depart," AM")
+                print("Address\t",self.address)
+                print("Destination\t",self.desti)
+                print("Ticketprice\t",self.tprice)
+                print("Airport\t",self.lo," International Airport")
+class Domestic(Passenger):
+        def __init__(self):
+                Passenger.__init__(self)
+                self.adhar=int(input("Enter your adhar number:"))
+                self.panid=int(input("Enter the pan id:"))
+                self.voteid=int(input("Enter your voteid:"))
+        def calpackage(self):
+                self.depart=random.randint(1,12)
+                print("Enter your destination:")
+                print("1.Mumbai")
+                print("2.Kolkata")
+                print("3.Delhi")
+                print("4.Cochin")
+                print("5.Madurai")
+                print("6.Trichy")
+                x=int(input())
+                if x==1:
+                        self.tprice+=3000
+                        self.desti="Mumbai"
+                elif x==2:
+                        self.tprice+=2500
+                        self.desti="Kolkata"
+                elif x==3:
+                        self.tprice+=4000
+                        self.desti="Delhi"
+                elif x==4:
+                        self.tprice+=1500
+                        self.desti="Cochin"
+                elif x==5:
+                        self.tprice+=1000
+                        self.desti="Madurai"
+                else:
+                        self.tprice+=1000
+                        self.desti="Trichy"
+                print("Enter the Class")
+                print("1.Economic class")
+                print("2.Business class")
+                y=int(input())
+                if y==1:
+                        self.cprice=5000
+                else:
+                        self.cprice=12000
+                self.tprice+=self.cprice
+                print("Enter package details")
+                print("1.Luggage less than 40kg")
+                print("2.luggage greater than 40kg")
+                z=int(input())
+                if z==2:
+                        self.tprice+=1100
+        def showpack(self):
+                print("Class price",self.cprice)
+                print("Aaadhar no",self.adhar)
+                print("Pan ID",self.panid)
+                print("Voter ID",self.voteid)
+class International(Passenger):
+        def __init__(self):
+                Passenger.__init__(self)
+                self.passid=int(input("Enter your passportb number:"))
+                self.viscode=int(input("Enter the visa code:"))
+                self.renew=input("Enter your renewal date:")
+                self.ptype=input("Enter passport type:")
+        def calpackage(self):
+                self.depart=random.randint(2,12)
+                print("Enter your destination:")
+                print("1.kuala Lampur")
+                print("2.Seoul")
+                print("3.London")
+                print("4.Paris")
+                print("5.Newyork")
+                print("6.Toronto")
+                x=int(input())
+                if x==1:
+                        self.tprice+=40000
+                        self.desti="Kualalampur"
+                elif x==2:
+                        self.tprice+=45000
+                        self.desti="seoul"
+                elif x==3:
+                        self.tprice+=60000
+                        self.desti="London"
+                elif x==4:
+                        self.tprice+=75000
+                        self.desti="Paris"
+                elif x==5:
+                        self.tprice+=76000
+                        self.desti="Newyork"
+                else:
+                        self.tprice+=100000
+                        self.desti="Toronto"
+                print("Enter the Class")
+                print("1.Economic class")
+                print("2.Business class")
+                y=int(input())
+                if y==1:
+                        self.cprice=5000
+                else:
+                        self.cprice=12000
+                self.tprice+=self.cprice
+                print("Enter package details")
+                print("1.Luggage less than 40kg")
+                print("2.luggage greater than 40kg")
+                z=int(input())
+                if z==2:
+                        self.tprice+=3100
+        def showpack(self):
+                print("Class price",self.cprice)
+                print("Passport no",self.passid)
+                print("Visa code",self.viscode)
+                print("Renewaldate",self.renew)
+                print("Passporttype",self.ptype)
+
+import travel
+print("************Welcome to Jet airways***************")
+n=1
+us=[]
+while n:
+        print("1.Register")
+        print("2.Login")
+        print("3.exit")
+        ch=int(input("Enter your choice"))
+        if ch==1:
+                us.append(travel.User())
+                us[len(us)-1].registration()
+                print("Registration completed successfully")
+        elif ch==2:
+                ks=int(input("Enter your userid"))
+                pswd=int(input("Enter your password"))
+                c=0
+                for obj in us:
+                        x=obj.accountlogin(ks,pswd)
+                        if x:
+                                c+=1
+                                nnn=obj.name
+                if c==0:
+                        print("INVALID USER OR PASSWORD")
+                else:
+                        print("Welcome         ",nnn)
+                        print("1.Domestic Booking")
+                        print("2.International Booking")
+                        m3=int(input())
+                        if m3==1:
+                                print("Domestic Booking")
+                                num=int(input("Enter number of passengers"))
+                                passen=[]
+                                print("Enter passenger details")
+                                for i in range(num):
+                                        passen.append(travel.Domestic())
+                                for obj in passen:
+                                        obj.calpackage()
+                                n1=1
+                                while n1:
+                                        print("1.display Booking details")
+                                        print("2.cancel a ticket")
+                                        print("3.update booking details")
+                                        print("4.Book extra tickets")
+                                        print("5.EXIT")
+                                        ch2=int(input())
+                                        if ch2==1:
+                                                for obj in passen:
+                                                        obj.display()
+                                                        obj.showpack()
+                                        elif ch2==2:
+                                                na=input("Enter passenger name")
+                                                for obj in passen:
+                                                        if obj.name==na:
+                                                                passen.remove(obj)
+                                                                print("Ticket Cancelled")
+                                        elif ch2==3:
+                                                        nam=input("Enter passenger name")
+                                                        print("Enter details to update")
+                                                        aa=int(input("Aadhar id"))
+                                                        pa=int(input("Pan id"))
+                                                        vo=int(input("Voter id"))
+                                                        for obj in passen:
+                                                                if obj.name==nam:
+                                                                        obj.adhar=aa
+                                                                        obj.panid=pa
+                                                                        obj.voteid=vo
+                                        elif ch2==4:
+                                                m7=len(passen)
+                                                mm=int(input("Enter number of passengers to add"))
+                                                for i in range(m7-1,mm):
+                                                        passen.append(travel.Domestic())
+                                                for i in range(m7-1,mm):
+                                                        passen[i].calpackage()
+                                        elif ch2==5:
+                                                print("Exited")
+                                                n1=0
+                                        else:
+                                                print("Enter valid choice")
+                                print("_________________Booking completed________________")
+                        if m3==2:
+                                print("International Booking")
+                                nu=int(input("Enter number of passengers"))
+                                passe=[]
+                                print("Enter passenger details")
+                                for i in range(nu):
+                                        passe.append(travel.International())
+                                for obj in passe:
+                                        obj.calpackage()
+                                n2=1
+                                while n2:
+                                        print("1.display Booking details")
+                                        print("2.cancel a ticket")
+                                        print("3.update booking details")
+                                        print("4.Book extra tickets")
+                                        print("5.EXIT")
+                                        ch3=int(input())
+                                        if ch3==1:
+                                                for obj in passe:
+                                                        obj.display()
+                                                        obj.showpack()
+                                        elif ch3==2:
+                                                nc=input("Enter passenger name")
+                                                for obj in passe:
+                                                        if obj.name==nc:
+                                                                passe.remove(obj)
+                                                                print("Ticket Cancelled")
+                                        elif ch3==3:
+                                                ny=input("Enter passenger name")
+                                                print("Enter details to update")
+                                                ay=int(input("passportr id"))
+                                                py=int(input("visa code"))
+                                                vy=int(input("Renewal date"))
+                                                my=input("Enter Passport type")
+                                                for obj in passe:
+                                                        if obj.name==ny:
+                                                                obj.passid=ay
+                                                                obj.viscode=py
+                                                                obj.renew=vy
+                                                                obj.ptypee=my
+                                        elif ch3==4:
+                                                im=int(input("Enter number of passengers"))
+                                                iim=len(passe)
+                                                for i in range(iim-1,im):
+                                                        passe.append(travel.International())
+                                                        passe[i].calpackage()
+                                        elif ch3==5:
+                                                print("Exited")
+                                                n2=0
+                                        else:
+                                                print("Enter valid choice")
+                        print("_________________Booking completed________________")
+        elif ch==3:
+                print("Exited")
+                n=0
+        else:
+                print("ENTER VALID CHOICE!")
